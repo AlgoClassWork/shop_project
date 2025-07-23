@@ -9,7 +9,7 @@ class Category(models.Model):
         return self.name
     
 class Product(models.Model):
-    category = models.ForeignKey(related_name='products', on_delete=models.CASCADE, verbose_name='Категория')
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE, verbose_name='Категория')
     name = models.CharField(max_length=100, verbose_name='Название товара')
     slug = models.SlugField(max_length=100, unique=True, verbose_name='URL')
     description = models.TextField(blank=True, verbose_name='Описание')
