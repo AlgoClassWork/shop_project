@@ -1,5 +1,5 @@
 {% for category in categories %}
-    <a href=""> {{category.name}} </a>
+    <a href="{% url 'product_by_category' slug=category.slug %}"> {{category.name}} </a>
 {% endfor %}
 
 
