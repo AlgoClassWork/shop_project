@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from shop.views import product_list, product_detail
+from shop.views import product_list, product_detail, cart_add
 
 urlpatterns = [
     path('admin/', admin.site.urls),
