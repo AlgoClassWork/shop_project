@@ -28,6 +28,7 @@
                     <h2 class="product-name">{{ product.name }}</h2>
                     <p class="product-price">{{ product.price }} ₽</p>
                     <p class="product-date">{{ product.created_at|date:"d.m.Y" }}</p>
+                    <a href="{% url 'cart_add' slug=product.slug %}" class="btn">Добавить</a>
                     <a href="{% url 'product_detail' slug=product.slug %}" class="btn">Подробнее</a>
                 </div>
             {% endfor %}
