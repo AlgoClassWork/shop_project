@@ -1,3 +1,4 @@
+<a href="{% url 'product_list' %}"> Все товары </a>
 {% for category in categories %}
     <a href="{% url 'product_by_category' slug=category.slug %}"> {{category.name}} </a>
 {% endfor %}
