@@ -10,6 +10,12 @@ def product_list(request, slug=None):
     if slug:
         category = get_object_or_404(Category, slug=slug)
         products = products.filter(category=category)
-        
+
     context = {'products': products, 'categories': categories}
     return render(request, 'product_list.html', context)
+
+#http://127.0.0.1:8000/product/mylo
+def product_detail(request, slug):
+    product = get_object_or_404(Product, slug=slug, available=True)
+    context = {'product': product}
+    return render(request, 'product_detail.html', context)
