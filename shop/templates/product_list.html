@@ -1,15 +1,37 @@
-<a href="{% url 'product_list' %}"> Все товары </a>
-{% for category in categories %}
-    <a href="{% url 'product_by_category' slug=category.slug %}"> {{category.name}} </a>
-{% endfor %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог товаров</title>
+    <link rel="stylesheet" href="{% static 'product_list.css' %}">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'product_list' %}" class="nav-link">Все товары</a>
+            {% for category in categories %}
+                <a href="{% url 'product_by_category' slug=category.slug %}" class="nav-link">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+        </nav>
+    </header>
 
-
-{% for product in products %}
-    {% if product.image %}
-        <img src="{{ product.image.url }}">
-    {% endif %}
-    <p> {{ product.name }}  </p>
-    <p> {{ product.price }} </p>
-    <p> {{ product.created_at }} </p>
-    <a href="{% url 'product_detail' slug=product.slug %}"> Подробнее </a>
-{% endfor %}
+    <main>
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product-card">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+                    <h2 class="product-name">{{ product.name }}</h2>
+                    <p class="product-price">{{ product.price }} ₽</p>
+                    <p class="product-date">{{ product.created_at|date:"d.m.Y" }}</p>
+                    <a href="{% url 'product_detail' slug=product.slug %}" class="btn">Подробнее</a>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
