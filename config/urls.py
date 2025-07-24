@@ -24,7 +24,9 @@ from shop.views import product_list
 urlpatterns = [
     path('admin/', admin.site.urls),
     #http://127.0.0.1:8000/
-    path('', product_list, name='product_list')
+    path('', product_list, name='product_list'),
+    #http://127.0.0.1:8000/category/elektronika
+    path('category/<slug:slug>/', product_list, name='product_by_category')
 ]
 
 if settings.DEBUG:
