@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Product, Category
 # Create your views here.
@@ -19,3 +19,13 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, available=True)
     context = {'product': product}
     return render(request, 'product_detail.html', context)
+
+#http://127.0.0.1:8000/cart/add/zaporochez
+def cart_add(request, slug):
+    cart = request.session.get('cart', {})
+    product_slug = slug
+    quantity = cart.get( product_slug, 0 ) + 1
+    cart[product_slug] = quantity
+    request.session['cart'] = cart
+    print( request.session['cart'] )
+    return redirect( 'product_list' )
