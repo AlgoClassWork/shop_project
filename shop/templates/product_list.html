@@ -1,3 +1,8 @@
+{% for category in categories %}
+    <a href=""> {{category.name}} </a>
+{% endfor %}
+
+
 {% for product in products %}
     <p> {{ product.name }}  </p>
     <p> {{ product.price }} </p>
