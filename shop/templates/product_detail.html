@@ -1,0 +1,8 @@
+{% if product.image %}
+    <img src="{{ product.image.url }}">
+{% endif %}
+{{ product.name }}
+{{ product.description }}
+{{ product.price }}
+{{ product.created_at }}
+{{ product.stock }}
