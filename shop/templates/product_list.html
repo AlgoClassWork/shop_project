@@ -5,6 +5,9 @@
 
 
 {% for product in products %}
+    {% if product.image %}
+        <img src="{{ product.image.url }}">
+    {% endif %}
     <p> {{ product.name }}  </p>
     <p> {{ product.price }} </p>
     <p> {{ product.created_at }} </p>
