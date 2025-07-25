@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shop.models import Category, Product
+from shop.models import Category, Product, Order
 
 # Register your models here.
 @admin.register(Category)
@@ -14,3 +14,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('available', 'category')
     list_editable = ('price', 'stock', 'available')
     prepopulated_fields = {'slug': ('name', )}
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'address', 'created_at', 'total_cost', 'paid')
