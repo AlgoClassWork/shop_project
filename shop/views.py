@@ -22,6 +22,19 @@ def product_detail(request, slug):
 
 # http://127.0.0.1:8000/cart/
 def cart_detail(request):
+    cart = request.session.get('cart', {})
+    product_slugs = cart.keys() 
+    products = Product.objects.filter(slug__in=product_slugs)
+    cart_products = []
+    total_price = 0
+    
+    for product in products:
+        quantity = cart[product.slug]
+        total_item = product.price * quantity
+        cart_products.append( {'product': product, 'quantity': quantity, 'total_price': total_item} )
+        total_price += total_item
+
+    context = {'cart_products': cart_products, 'total_price': total_price}
     return render(request, 'cart_detail.html')
 
 # http://127.0.0.1:8000/cart/add/zaporochez
