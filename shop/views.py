@@ -27,7 +27,7 @@ def cart_detail(request):
     products = Product.objects.filter(slug__in=product_slugs)
     cart_products = []
     total_price = 0
-    
+
     for product in products:
         quantity = cart[product.slug]
         total_item = product.price * quantity
@@ -35,7 +35,7 @@ def cart_detail(request):
         total_price += total_item
 
     context = {'cart_products': cart_products, 'total_price': total_price}
-    return render(request, 'cart_detail.html')
+    return render(request, 'cart_detail.html', context)
 
 # http://127.0.0.1:8000/cart/add/zaporochez
 def cart_add(request, slug):
