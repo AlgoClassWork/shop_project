@@ -32,3 +32,6 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Заказ #{self.id}'
+    
+#python manage.py makemigrations
+#python manage.py migrate
