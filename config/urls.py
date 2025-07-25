@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from shop.views import product_list, product_detail, cart_add, cart_detail
+from shop.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +33,8 @@ urlpatterns = [
     path('cart/', cart_detail, name='cart_detail'),
     #http://127.0.0.1:8000/cart/add/zaporochez
     path('cart/add/<slug:slug>/', cart_add, name='cart_add'),
+    #http://127.0.0.1:8000/cart/remove/noutbuk
+    path('cart/remove/<slug:slug>/', cart_remove, name='cart_remove'),
 ]
 
 if settings.DEBUG:
