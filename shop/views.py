@@ -44,3 +44,7 @@ def cart_add(request, slug):
     cart[slug] = quantity
     request.session['cart'] = cart
     return redirect( 'product_list' )
+
+# http://127.0.0.1:8000/cart/remove/noutbuk
+def cart_remove(request, slug):
+    return redirect('cart_detail')
