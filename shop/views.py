@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
+from shop.forms import OrderCreateForm
+
 from .models import Product, Category
 # Create your views here.
 # http://127.0.0.1:8000/
@@ -52,3 +54,34 @@ def cart_remove(request, slug):
         del cart[slug]
         request.session['cart'] = cart
     return redirect('cart_detail')
+
+# http://127.0.0.1:8000/order/create
+def order_create(request):
+    if request.method == 'GET':
+        form = OrderCreateForm()
+        context = {'form' : form}
+        return render(request, 'order_create.html', context)
+    if request.method == 'POST':
+        cart = request.session.get('cart', {}) 
+        form = OrderCreateForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            product_slugs = cart.keys()
+            products = Product.objects.filter(slug__in=product_slugs)
+            items_text = []
+            total_cost = 0 
+            for product in products:
+                quantity = cart[product.slug] 
+                total_price = quantity * product.price 
+                items_text.append(f'{product.name} {quantity} шт. - {total_price} сом')
+                total_cost += total_price
+
+            order.products = '\n'.join(items_text)
+            order.total_cost = total_cost
+            order.save()
+
+            del request.session['cart']
+
+            context = {'order' : order}
+            return render(request, 'order_created.html', context)
+            
