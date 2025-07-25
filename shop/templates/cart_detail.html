@@ -1,0 +1,12 @@
+<h2> Ваша корзина: </h2>
+{% for product in cart_products %}
+    {% if product.product.image %}
+        <img src="{{ product.product.image.url }}">
+    {% endif %}
+    {{ product.product.name }}
+    {{ product.quantity }} шт
+    {{ product.product.price }} сом
+    {{ product.total_price }} сом
+{% endfor %}
+<p> Итого {{ total_price }} сом </p>
+<a href=" {% url 'product_list' %} "> Вернуться в магазин </a>
