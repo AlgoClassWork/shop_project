@@ -35,6 +35,8 @@ urlpatterns = [
     path('cart/add/<slug:slug>/', cart_add, name='cart_add'),
     #http://127.0.0.1:8000/cart/remove/noutbuk
     path('cart/remove/<slug:slug>/', cart_remove, name='cart_remove'),
+    #http://127.0.0.1:8000/order/create/
+    path('order/create/', order_create, name='order_create'),
 ]
 
 if settings.DEBUG:
