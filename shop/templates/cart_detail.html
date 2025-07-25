@@ -30,6 +30,7 @@
 
             <div class="cart-summary">
                 <p class="total-price">Итого: <strong>{{ total_price }} сом</strong></p>
+                <a href="{% url 'order_create' %}" class="back-to-shop"> Оформить заказ </a>
                 <a href="{% url 'product_list' %}" class="back-to-shop">← Вернуться в магазин</a>
             </div>
         {% else %}
