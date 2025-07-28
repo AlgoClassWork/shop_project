@@ -18,6 +18,13 @@
             <p class="date">Добавлено: {{ product.created_at|date:"d.m.Y" }}</p>
             <p class="stock">В наличии: {{ product.stock }}</p>
         </div>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button> Отправить отзыв </button>
+        </form>
+
     </main>
 </body>
 </html>
