@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
-from shop.forms import OrderCreateForm
+from shop.forms import OrderCreateForm, ReviewForm
 
 from .models import Product, Category
 # Create your views here.
@@ -19,7 +19,17 @@ def product_list(request, slug=None):
 # http://127.0.0.1:8000/product/mylo
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, available=True)
-    context = {'product': product}
+    form = ReviewForm()
+    
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            new_review = form.save(commit=False)
+            new_review.product = product
+            new_review.save()
+            return redirect('product_detail', slug=product.slug)
+        
+    context = {'product': product, 'form': form}
     return render(request, 'product_detail.html', context)
 
 # http://127.0.0.1:8000/cart/
