@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from shop.models import Category, Product, Order
+from shop.models import Category, Product, Order, Review
 
 # Register your models here.
 @admin.register(Category)
@@ -18,3 +18,7 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'address', 'created_at', 'total_cost', 'paid')
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('product', 'text', 'rating')
