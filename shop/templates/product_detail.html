@@ -25,6 +25,11 @@
             <button> Отправить отзыв </button>
         </form>
 
+        {% for review in reviews %}
+            <p> {{ review.text }} </p>
+            {{ review.rating }}
+        {% endfor %}
+
     </main>
 </body>
 </html>

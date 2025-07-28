@@ -19,8 +19,9 @@ def product_list(request, slug=None):
 # http://127.0.0.1:8000/product/mylo
 def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, available=True)
+    reviews = product.reviews.all()
     form = ReviewForm()
-    
+
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
@@ -29,7 +30,7 @@ def product_detail(request, slug):
             new_review.save()
             return redirect('product_detail', slug=product.slug)
         
-    context = {'product': product, 'form': form}
+    context = {'product': product, 'form': form, 'reviews': reviews}
     return render(request, 'product_detail.html', context)
 
 # http://127.0.0.1:8000/cart/
